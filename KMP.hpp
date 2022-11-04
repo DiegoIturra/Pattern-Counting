@@ -9,17 +9,14 @@ using namespace std;
 class KnuthMorrisPratt{
     private:
         string text;
-        string pattern;
-        vector<unsigned> table; //tabla de prefijos 
-        int patternLength; //Longitud de patron
         int textLength; //longitud de texto original
 
         //Se crea la tabla de prefijos
-        void kmpPreProcess();
+        vector<unsigned> kmpPreProcessTable(const string& pattern);
 
     public:
-        KnuthMorrisPratt(const string& text,const string& pattern);
-        unsigned countMatches();
+        KnuthMorrisPratt(const string& text);
+        unsigned countMatches(const string& pattern);
 
 };
 

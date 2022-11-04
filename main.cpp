@@ -6,8 +6,8 @@ using namespace std;
 
 int main(){
 
-	KnuthMorrisPratt kmp("holahola","hola");
-	cout << "matches KMP: " << kmp.countMatches() << endl;
+	KnuthMorrisPratt kmp("hola diego iturra diego diegodiego");
+	cout << "matches KMP: " << kmp.countMatches("diego") << endl;
 
 	SuffixArray sa("Hello world my name is Jerry");
 	cout << "matches SA: " << sa.countMatches("world") << endl;

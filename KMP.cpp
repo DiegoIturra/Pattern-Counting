@@ -5,7 +5,10 @@
 
 using namespace std;
 
-void KnuthMorrisPratt::kmpPreProcess(){
+
+vector<unsigned> KnuthMorrisPratt::kmpPreProcessTable(const string& pattern){
+    unsigned patternLength = pattern.length();
+    vector<unsigned> table(pattern.length(),0);
     int i = 0;
     int j = -1;
     table[0] = -1;
@@ -19,29 +22,28 @@ void KnuthMorrisPratt::kmpPreProcess(){
         i++; j++;
         table[i] = j;
     }
+    return table;
 }
 
-KnuthMorrisPratt::KnuthMorrisPratt(const string& text,const string& pattern){
+
+KnuthMorrisPratt::KnuthMorrisPratt(const string& text){
     this->text = text;
-    this->pattern = pattern;
-    this->table.assign(pattern.length(),0);
-
-    this->patternLength = pattern.length();
     this->textLength = text.length();
-
-    kmpPreProcess();
 }
 
-unsigned KnuthMorrisPratt::countMatches(){
+
+unsigned KnuthMorrisPratt::countMatches(const string& pattern){
+    unsigned patternLength = pattern.length();
+    vector<unsigned> table = kmpPreProcessTable(pattern);
 
     int i = 0, j = 0;
     unsigned matches = 0;
 
-    while(i < textLength){
+    while(i < this->textLength){
 
         //cada vez que hay un mismatch se actualizan los indices de j para seguir
         //haciendo shift sobre el texto original
-        while(j >= 0 && text[i] != pattern[j]){
+        while(j >= 0 && this->text[i] != pattern[j]){
             j = table[j];
         }
         i++; j++;
