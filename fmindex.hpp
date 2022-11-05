@@ -1,5 +1,9 @@
+#ifndef FMINDEX
+#define FMINDEX
+
 #include <string>
 #include <vector>
+#include <map>
 using namespace std;
 
 class FMIndex {
@@ -14,8 +18,10 @@ private:
 
 public:
 	
-	FMIndex(const string &T);
+	FMIndex(const string &T, int mval);
 	string extract();
-	int count(const string &s);
+	int countMatches(const string &s);
 	void displayL();
 };
+
+#endif
