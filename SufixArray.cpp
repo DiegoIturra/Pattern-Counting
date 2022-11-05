@@ -9,17 +9,17 @@
 
 using namespace std;
 
-bool SuffixArray::compareSuffix(unsigned l,unsigned r){
-    return _sv.substr(l) < _sv.substr(r);
-}
-
 SuffixArray::SuffixArray(const string& s){
     _t = s;
     _arr.resize(s.size() + 1);
     _t.push_back('$');
     _sv = string_view(_t);
     iota(_arr.begin(),_arr.end(),0);
-    sort(_arr.begin(), _arr.end(), bind(&SuffixArray::compareSuffix,this,placeholders::_1, placeholders::_2));    
+    sort(_arr.begin(), _arr.end(), //se ordenan los indices segun la funcion creada abajo ordenando asi los sufijos por alfabeto
+            [this](unsigned l, unsigned r) -> bool{
+                return this->_sv.substr(l)< this->_sv.substr(r);
+            }
+        );  
 }
 
 unsigned SuffixArray::countMatches(const string& s){
