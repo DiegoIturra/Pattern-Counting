@@ -76,6 +76,7 @@ int main(int argc, char **argv){
 			diff = end - start;
 			vals[i] = diff.count();
 		}
+
 	}
 
 	double med = 0;
