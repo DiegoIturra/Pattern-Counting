@@ -38,8 +38,7 @@ int main(int argc, char **argv){
 	double vals[rep];
 	int espacioSS = 0;
 
-	if(option == 1){
-		SuffixArray SA(Sinput);
+	if(option == 0){
 		KnuthMorrisPratt kmp(Sinput);
 		for (int i = 0; i < rep; ++i){
 			string searchStr = string(sv.substr((rand()%(len-sSize-1)),sSize));
@@ -52,7 +51,7 @@ int main(int argc, char **argv){
 			vals[i] = diff.count();
 		}
 	}
-	else if(option == 2){
+	else if(option == 1){
 		SuffixArray SA(Sinput);
 		for (int i = 0; i < rep; ++i){
 			string searchStr = string(sv.substr((rand()%(len-sSize-1)),sSize));
@@ -77,7 +76,6 @@ int main(int argc, char **argv){
 			diff = end - start;
 			vals[i] = diff.count();
 		}
-
 	}
 
 	double med = 0;
