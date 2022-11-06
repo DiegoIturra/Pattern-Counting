@@ -29,19 +29,22 @@ int main(int argc, char **argv){
 	//variables utilizadas
 	chrono::time_point<chrono::high_resolution_clock> start, end;
 	chrono::duration<double> diff;
-	srand (time(NULL));
+	srand (time(0));
 	ifstream file("data.txt");//archivo utilizado
 	char *input = new char [len];
 	file.read(input,len);
 	string Sinput(input);
-	string_view sv  = string_view(Sinput);
 	double vals[rep];
 	int espacioSS = 0;
 
 	if(option == 0){
 		KnuthMorrisPratt kmp(Sinput);
+		SuffixArray SA(Sinput);
+		FMIndex fmi(Sinput,1000);
+		cout<<'\0';
 		for (int i = 0; i < rep; ++i){
-			string searchStr = string(sv.substr((rand()%(len-sSize-1)),sSize));
+			int pos = rand()%(len-sSize-1);
+			string searchStr = Sinput.substr(pos,sSize);
 			start = chrono::high_resolution_clock::now();
 			espacio = 0;
 			kmp.countMatches(searchStr);
@@ -54,7 +57,8 @@ int main(int argc, char **argv){
 	else if(option == 1){
 		SuffixArray SA(Sinput);
 		for (int i = 0; i < rep; ++i){
-			string searchStr = string(sv.substr((rand()%(len-sSize-1)),sSize));
+			int pos = rand()%(len-sSize-1);
+			string searchStr = Sinput.substr(pos,sSize);
 			start = chrono::high_resolution_clock::now();
 			espacio = 0;
 			SA.countMatches(searchStr);
@@ -67,7 +71,8 @@ int main(int argc, char **argv){
 	else{
 		FMIndex fmi(Sinput,1000);
 		for (int i = 0; i < rep; ++i){
-			string searchStr = string(sv.substr((rand()%(len-sSize-1)),sSize));
+			int pos = rand()%(len-sSize-1);
+			string searchStr = Sinput.substr(pos,sSize);
 			start = chrono::high_resolution_clock::now();
 			espacio = 0;
 			fmi.countMatches(searchStr);
@@ -78,6 +83,8 @@ int main(int argc, char **argv){
 		}
 
 	}
+
+	delete[] input;
 
 	double med = 0;
 

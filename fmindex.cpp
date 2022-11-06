@@ -18,14 +18,15 @@ string FMIndex::BWTC(const string &source, map<char,int> &c){
     string L;
     string t = source;
     vector<unsigned> _arr(source.size()+1);
-    t.push_back('$');
+    t.push_back(char(4));
 	string_view sv = string_view(t);
 	iota(_arr.begin(),_arr.end(),0);//se crea arreglo de 0 a souce.size()+1
 	sort(_arr.begin(), _arr.end(), //se ordenan los indices segun la funcion creada abajo ordenando asi los sufijos por alfabeto
 			[sv](unsigned l, unsigned r) -> bool{
 				return sv.substr(l)< sv.substr(r);
 			}
-		); 
+		);
+
     for (int i = 0; i < t.size(); ++i){
     	int j = _arr[i] - 1;
     	if(j < 0 )j += t.size();
@@ -70,6 +71,14 @@ int FMIndex::Occ(char c, int k){
 	}
 	return sum;
 }
+
+/*int FMIndex::Occ(char c, int k){
+	int sum = 0;
+	for (int j = 0 ; j < k; ++j){
+		if(L[j]==c)sum++;
+	}
+	return sum;
+}*/
 
 /*
 retorna el indice del elemento correspondiente a el sufijo que
