@@ -5,7 +5,10 @@
 
 using namespace std;
 
+/*Codigo extrido y modificado del libro Competitive Programming 3 by Steven Halim and Feliz Halimn*/
 
+/*Se creaa la tabla de indices de fallos la cual depende de la longitud del patron y 
+por cada mismatch que exista se actualiza el indice de cuantos saltos se deben dar*/
 vector<unsigned> KnuthMorrisPratt::kmpPreProcessTable(const string& pattern){
     unsigned patternLength = pattern.length();
     vector<unsigned> table(pattern.length(),0);
@@ -25,7 +28,7 @@ vector<unsigned> KnuthMorrisPratt::kmpPreProcessTable(const string& pattern){
     return table;
 }
 
-
+//Solo se guarda el texto original y su longitud
 KnuthMorrisPratt::KnuthMorrisPratt(const string& text){
     this->text = text;
     this->textLength = text.length();
